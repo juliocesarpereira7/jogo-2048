@@ -9,13 +9,17 @@ int sortearCasa();
 void gotoxy(int x, int y);
 void TelaJogo();
 
-// VARIAVEIS GLOBAIS (FUNCIONAM EM TODO O CÓDIGO)	
+
+// VARIAVEIS GLOBAIS (FUNCIONAM EM TODO O Cï¿½DIGO)	
 int	confirm = 0;			    
 int linhatela = 0;
 int tecla = 0;
 int colunatela = 0;
 int linha,coluna = 0;
-int casas[4][4];					// MATRIZ DE CASAS (INT) E SEM VALOR. OS VALORES SERÃO ADICIONADOS NA FUNÇÃO MAIN
+int casas[4][4];					// MATRIZ DE CASAS (INT) E SEM VALOR. OS VALORES SERï¿½O ADICIONADOS NA FUNï¿½ï¿½O MAIN
+
+
+
 
 
 // FUNCAO PRINCIPAL
@@ -34,13 +38,18 @@ main(){
 	do{
 		printf("\n\n\n\n");
 		printf("\t\t\t\t\tDigite qualquer numero: ");			
+
 			opcao = getch();					// CAPTURA A TECLA DIGITADA
+
+		scanf("%i", &opcao);					// CAPTURA A TECLA DIGITADA
+
 
 		if (opcao != 9999){						// SE A TECLA DIGITADA NAO FOR 9999
 			sortearCasa();						// SORTEIA CASA
 			system("cls");						// LIMPA A TELA
 			TelaJogo();							// CRIA NOVA TELA COM OS VALORES ATUALIZADOS
 		}
+
 
 	
 	
@@ -117,7 +126,11 @@ main(){
 	
 }
 
-// FUNCOES SECUNDARIAS
+	
+
+
+
+
 
 TelaJogo(){  // criando matriz casas e juntando com TelaJogo
 	
@@ -174,6 +187,8 @@ TelaJogo(){  // criando matriz casas e juntando com TelaJogo
 		colunatela = 24;
 	}
 	
+
+
 }
 
 
@@ -184,10 +199,10 @@ sortearCasa(){
 
 	do 												
 	{ 
-	   	sorteiacoluna = rand() & 3;							// SORTEIA POSIÇÃO PARA A COLUNA
-		sorteialinha = rand() & 3;							// SORTEIA POSIÇÃO PARA A LINHA
+	   	sorteiacoluna = rand() & 3;							// SORTEIA POSIÃ‡ÃƒO PARA A COLUNA
+		sorteialinha = rand() & 3;							// SORTEIA POSIÃ‡ÃƒO PARA A LINHA
 
-		if (casas[sorteialinha][sorteiacoluna] == 0){		// VERIFICA SE O NUMERO DENTRO DA CASA CONFIRMADA É 0
+		if (casas[sorteialinha][sorteiacoluna] == 0){		// VERIFICA SE O NUMERO DENTRO DA CASA CONFIRMADA Ã‰ 0
 			casas[sorteialinha][sorteiacoluna] = 2;			// SE FOR 0, PASSA A VALER 2
 			confirm = 0;									// CONFIRMA
 		} else {											// SE NAO FOR 0
@@ -196,6 +211,8 @@ sortearCasa(){
 	}	while (confirm != 0);								// REPETE
 
 }
+
+
 
 gotoxy(int x, int y){
   COORD coord;
