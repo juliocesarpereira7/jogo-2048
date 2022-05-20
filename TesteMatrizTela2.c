@@ -37,32 +37,20 @@ main(){
 
 	do{
 		printf("\n\n\n\n");
-		printf("\t\t\t\t\tDigite qualquer numero: ");			
+		printf("\t\t\t\t\tJOGUE UTILIZANDO W, A, S, D ");			
 
-			opcao = getch();					// CAPTURA A TECLA DIGITADA
-
-		scanf("%i", &opcao);					// CAPTURA A TECLA DIGITADA
-
-
-		if (opcao != 9999){						// SE A TECLA DIGITADA NAO FOR 9999
-			sortearCasa();						// SORTEIA CASA
-			system("cls");						// LIMPA A TELA
-			TelaJogo();							// CRIA NOVA TELA COM OS VALORES ATUALIZADOS
-		}
-
+			tecla = getch();					// CAPTURA A TECLA DIGITADA
 
 	
-	
-		if ((tecla == 68) && (tecla == 100)){ // TECLA D
+		if ((tecla == 68) || (tecla == 100)){ // TECLA D
 	
 			for (linhatela = 0; linhatela < 4; linhatela++){
 				for(colunatela = 0; colunatela < 4; colunatela++){
 			
-				 casas[linha][coluna] = casas[linha][coluna] + casas[linha+1][coluna];
-			
-				casas[linha][coluna] = casas[linha][coluna] + casas[linha+2][coluna];
-			
-				casas[linha][coluna] = casas[linha][coluna] + casas[linha+3][coluna];
+				if((casas[linha][coluna+1] == 0) && (casas[linha][coluna] != 0)){
+					casas[linha][coluna+1] = casas[linha][coluna];
+					casas[linha][coluna] = 0;
+				}
 			
 				}
 			}
@@ -71,7 +59,7 @@ main(){
 	
 	
 	
-		else if ((tecla == 65) && (tecla == 97)){ // TECLA A 
+		else if ((tecla == 65) || (tecla == 97)){ // TECLA A 
 	
 			for (linhatela = 0; linhatela < 4; linhatela++){
 				for(colunatela = 0; colunatela < 4; colunatela++){
@@ -88,7 +76,7 @@ main(){
 				sortearCasa();
 		}
 	
-		else if ((tecla == 87) && (tecla == 119)){ //TECLA W
+		else if ((tecla == 87) || (tecla == 119)){ //TECLA W
 	
 			for (linhatela = 0; linhatela < 4; linhatela++){
 				for(colunatela = 0; colunatela < 4; colunatela++){
@@ -105,7 +93,7 @@ main(){
 				sortearCasa();
 		}
 	
-		else if ((tecla == 83) && (tecla == 115)){ //TECLA S
+		else if ((tecla == 83) || (tecla == 115)){ //TECLA S
 	
 			for (linhatela = 0; linhatela < 4; linhatela++){
 				for(colunatela = 0; colunatela < 4; colunatela++){
@@ -119,9 +107,12 @@ main(){
 			
 				}
 			}
-			sortearCasa();
+				sortearCasa();	
 		}
-	}while(opcao != 999);
+		
+		system("cls");						// LIMPA A TELA
+		TelaJogo();	
+	}while(tecla != 999);
 		
 	
 }
