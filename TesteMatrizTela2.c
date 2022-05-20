@@ -5,18 +5,121 @@
 #include <locale.h>
 #include <time.h>
 
+int sortearCasa();
+void gotoxy(int x, int y);
+void TelaJogo();
 
-void gotoxy(int x, int y)
-	{
-		COORD coord;
-  		coord.X = x;
-  		coord.Y = y;
-  		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+// VARIAVEIS GLOBAIS (FUNCIONAM EM TODO O CÓDIGO)	
+int	confirm = 0;			    
+int linhatela = 0;
+int tecla = 0;
+int colunatela = 0;
+int linha,coluna = 0;
+int casas[4][4];					// MATRIZ DE CASAS (INT) E SEM VALOR. OS VALORES SERÃO ADICIONADOS NA FUNÇÃO MAIN
+
+
+// FUNCAO PRINCIPAL
+main(){
+	int opcao = 0;
+
+	TelaJogo(); // Tela matriz e jogo junto
+	
+	
+	for (linhatela = 0; linhatela < 4; linhatela++){  
+		for(colunatela = 0; colunatela < 4; colunatela++){
+			casas[linhatela][colunatela] = 0; //definindo as casas em branco
+		}
 	}
-		
 
-void TelaJogo (char casas2[4][4]) {  // criando matriz casas2 e juntando com TelaJogo
-	system ("cls");
+	do{
+		printf("\n\n\n\n");
+		printf("\t\t\t\t\tDigite qualquer numero: ");			
+			opcao = getch();					// CAPTURA A TECLA DIGITADA
+
+		if (opcao != 9999){						// SE A TECLA DIGITADA NAO FOR 9999
+			sortearCasa();						// SORTEIA CASA
+			system("cls");						// LIMPA A TELA
+			TelaJogo();							// CRIA NOVA TELA COM OS VALORES ATUALIZADOS
+		}
+
+	
+	
+		if ((tecla == 68) && (tecla == 100)){ // TECLA D
+	
+			for (linhatela = 0; linhatela < 4; linhatela++){
+				for(colunatela = 0; colunatela < 4; colunatela++){
+			
+				 casas[linha][coluna] = casas[linha][coluna] + casas[linha+1][coluna];
+			
+				casas[linha][coluna] = casas[linha][coluna] + casas[linha+2][coluna];
+			
+				casas[linha][coluna] = casas[linha][coluna] + casas[linha+3][coluna];
+			
+				}
+			}
+				sortearCasa();
+		}
+	
+	
+	
+		else if ((tecla == 65) && (tecla == 97)){ // TECLA A 
+	
+			for (linhatela = 0; linhatela < 4; linhatela++){
+				for(colunatela = 0; colunatela < 4; colunatela++){
+			
+			
+				casas[linha][coluna] = casas[linha][coluna] + casas[linha-1][coluna];
+			
+				casas[linha][coluna] = casas[linha][coluna] + casas[linha-2][coluna];
+				
+				casas[linha][coluna] = casas[linha][coluna] + casas[linha-3][coluna];
+			
+				}
+			}
+				sortearCasa();
+		}
+	
+		else if ((tecla == 87) && (tecla == 119)){ //TECLA W
+	
+			for (linhatela = 0; linhatela < 4; linhatela++){
+				for(colunatela = 0; colunatela < 4; colunatela++){
+			
+				
+				casas[linha][coluna] = casas[linha][coluna] + casas[linha][coluna+1];
+			
+				casas[linha][coluna] = casas[linha][coluna] + casas[linha][coluna+2];
+			
+				casas[linha][coluna] = casas[linha][coluna] + casas[linha][coluna+3];
+			
+				}
+			}
+				sortearCasa();
+		}
+	
+		else if ((tecla == 83) && (tecla == 115)){ //TECLA S
+	
+			for (linhatela = 0; linhatela < 4; linhatela++){
+				for(colunatela = 0; colunatela < 4; colunatela++){
+			
+			
+				casas[linha][coluna] = casas[linha][coluna] + casas[linha][coluna-1];
+			
+				casas[linha][coluna] = casas[linha][coluna] + casas[linha][coluna-2];
+			
+				casas[linha][coluna] = casas[linha][coluna] + casas[linha][coluna-3];
+			
+				}
+			}
+			sortearCasa();
+		}
+	}while(opcao != 999);
+		
+	
+}
+
+// FUNCOES SECUNDARIAS
+
+TelaJogo(){  // criando matriz casas e juntando com TelaJogo
 	
 	printf("                ___________________________________________________________________________________ \n");
 	printf("               |                                                       |         RANKING           |\n");
@@ -30,97 +133,75 @@ void TelaJogo (char casas2[4][4]) {  // criando matriz casas2 e juntando com Tel
 	printf("               |                    |                     |                    |                   |\n");
 	printf("               |                    |                     |                    |                   |\n");
 	printf("               |                    |                     |                    |                   |\n");
-	printf("               |                    |                     |                    |                   |\n", casas2[0][0], casas2[0][1], casas2[0][2], casas2[0][3]);
+	printf("               |                    |                     |                    |                   |\n");
 	printf("               |                    |                     |                    |                   |\n");
 	printf("               |                    |                     |                    |                   |\n");
 	printf("               |____________________|_____________________|____________________|___________________|\n");
 	printf("               |                    |                     |                    |                   |\n");
 	printf("               |                    |                     |                    |                   |\n");
 	printf("               |                    |                     |                    |                   |\n");
-	printf("               |                    |                     |                    |                   |\n", casas2[1][0], casas2[1][1], casas2[1][2], casas2[1][3]);
+	printf("               |                    |                     |                    |                   |\n");
 	printf("               |                    |                     |                    |                   |\n");
 	printf("               |                    |                     |                    |                   |\n");
 	printf("               |____________________|_____________________|____________________|___________________|\n");
 	printf("               |                    |                     |                    |                   |\n");
 	printf("               |                    |                     |                    |                   |\n");
 	printf("               |                    |                     |                    |                   |\n");
-	printf("               |                    |                     |                    |                   |\n", casas2[2][0], casas2[2][1], casas2[2][2], casas2[2][3]);
+	printf("               |                    |                     |                    |                   |\n");
 	printf("               |                    |                     |                    |                   |\n");
 	printf("               |                    |                     |                    |                   |\n");
 	printf("               |____________________|_____________________|____________________|___________________|\n");
 	printf("               |                    |                     |                    |                   |\n");
 	printf("               |                    |                     |                    |                   |\n");
 	printf("               |                    |                     |                    |                   |\n");
-	printf("               |                    |                     |                    |                   |\n", casas2[3][0], casas2[3][1], casas2[3][2], casas2[3][3]);
+	printf("               |                    |                     |                    |                   |\n");
 	printf("               |                    |                     |                    |                   |\n");
 	printf("               |                    |                     |                    |                   |\n");
 	printf("               |____________________|_____________________|____________________|___________________|\n");
-	
-}
 
-main(){
-	char casas[4][4]= { { '0','0','0','0'}, //criando matriz e testando se o número entra 
-	                    { '0','0','0','0'},       
-					    { '0','0','0','0'},		
-					    { '0','0','0','0'} };
-					    
-	int	confirm = 0;			    			    
-	int sorteialinha = 0;
-	int sorteiacoluna = 0;				    
-	int linhatela = 0;
-	int colunatela =0;
-	int linha,coluna = 0;
-	
-	TelaJogo(casas); // Tela matriz e jogo junto
-	
-	
-	for (linhatela = 0; linhatela < 4; linhatela++){  
-		for(colunatela = 0; colunatela < 4; colunatela++){
-			casas[linhatela][colunatela] = 0; //definindo as casas em branco
-		}
-	}
-	
-	do 
-	{ 
-	   sorteiacoluna = rand() & 3;
-		sorteialinha = rand() & 3;
-	if (casas[sorteialinha][sorteiacoluna] == 0){
-		casas[sorteialinha][sorteiacoluna] = 2;
-		confirm = 0;
-	} else {
-		confirm = 1;
-	}
-	}	while (confirm !=0);
-	
-	
-	
-	if (casas[sorteialinha][sorteiacoluna] = 0){   //conferindo se está em branco e se são iguais e somando 
-		if(casas[linhatela][colunatela] == casas[linhatela][colunatela]){
-			casas[linha][coluna] = casas[linha][coluna] + casas[linha][coluna-1];
-			casas[linha][coluna] = casas[linha][coluna] + casas[linha][coluna+1];
-			casas[linha][coluna] = casas[linha][coluna] + casas[linha-1][coluna];
-			casas[linha][coluna] = casas[linha][coluna] + casas[linha+1][coluna];
-		}
-	}
-			
-			
-	
 	colunatela = 24;  //posicionando com gotoxy
     linhatela = 12;
 	for(linha = 0;linha < 4; linha++){
 		for(coluna = 0;coluna < 4; coluna++){
-			gotoxy(colunatela,linhatela);
-			printf("%c ", casas[linha][coluna]);
-			colunatela = colunatela + 21;
+			gotoxy(colunatela, linhatela);
+			if (casas[linha][coluna] != 0){
+				printf("%i ", casas[linha][coluna]);
+				colunatela = colunatela + 21;
+			}
 		}
 		printf("\n");
 		linhatela  =  linhatela + 7;
-		colunatela =24;
+		colunatela = 24;
 	}
 	
-	
-	 
-
-getch();
-return 0;	
 }
+
+
+
+
+sortearCasa(){
+	int	confirm, sorteiacoluna, sorteialinha = 0;
+
+	do 												
+	{ 
+	   	sorteiacoluna = rand() & 3;							// SORTEIA POSIÇÃO PARA A COLUNA
+		sorteialinha = rand() & 3;							// SORTEIA POSIÇÃO PARA A LINHA
+
+		if (casas[sorteialinha][sorteiacoluna] == 0){		// VERIFICA SE O NUMERO DENTRO DA CASA CONFIRMADA É 0
+			casas[sorteialinha][sorteiacoluna] = 2;			// SE FOR 0, PASSA A VALER 2
+			confirm = 0;									// CONFIRMA
+		} else {											// SE NAO FOR 0
+			confirm = 1;									// NAO CONFIRMA
+		}													
+	}	while (confirm != 0);								// REPETE
+
+}
+
+gotoxy(int x, int y){
+  COORD coord;
+  coord.X = x;
+  coord.Y = y;
+  SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+
