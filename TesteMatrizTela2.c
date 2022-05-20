@@ -34,6 +34,10 @@ main(){
 			casas[linhatela][colunatela] = 0; //definindo as casas em branco
 		}
 	}
+	
+	sortearCasa();
+	system("cls");
+	TelaJogo();
 
 	do{
 		printf("\n\n\n\n");
@@ -47,9 +51,13 @@ main(){
 			for (linhatela = 0; linhatela < 4; linhatela++){
 				for(colunatela = 0; colunatela < 4; colunatela++){
 			
-				if((casas[linha][coluna+1] == 0) && (casas[linha][coluna] != 0)){
-					casas[linha][coluna+1] = casas[linha][coluna];
-					casas[linha][coluna] = 0;
+				if( (casas[linhatela][colunatela+1] == 0) && (casas[linhatela][colunatela]!= 0) && (colunatela != 0) && (colunatela != 0 ) ){
+					casas[linhatela][colunatela+1] = casas[linhatela][colunatela];
+					casas[linhatela][colunatela] = 0;
+				}
+				if((casas[linhatela][colunatela+1] == casas[linhatela][colunatela] && casas[linhatela][colunatela] !=0)){
+					casas[linhatela][colunatela] = (casas[linhatela][colunatela]) *2;
+					casas[linhatela][colunatela+1] = 0;
 				}
 			
 				}
@@ -65,11 +73,14 @@ main(){
 				for(colunatela = 0; colunatela < 4; colunatela++){
 			
 			
-				casas[linha][coluna] = casas[linha][coluna] + casas[linha-1][coluna];
-			
-				casas[linha][coluna] = casas[linha][coluna] + casas[linha-2][coluna];
-				
-				casas[linha][coluna] = casas[linha][coluna] + casas[linha-3][coluna];
+				if( (casas[linhatela][colunatela-1] == 0) && (casas[linhatela][colunatela]!= 0) && (colunatela != 0) &&  (colunatela != 3 ) ){
+					casas[linhatela][colunatela-1] = casas[linhatela][colunatela];
+					casas[linhatela][colunatela] = 0;
+				}
+				if((casas[linhatela][colunatela-1] == casas[linhatela][colunatela] && casas[linhatela][colunatela] !=0)){
+					casas[linhatela][colunatela] = (casas[linhatela][colunatela]) *2;
+					casas[linhatela][colunatela-1] = 0;
+				}
 			
 				}
 			}
@@ -82,11 +93,14 @@ main(){
 				for(colunatela = 0; colunatela < 4; colunatela++){
 			
 				
-				casas[linha][coluna] = casas[linha][coluna] + casas[linha][coluna+1];
-			
-				casas[linha][coluna] = casas[linha][coluna] + casas[linha][coluna+2];
-			
-				casas[linha][coluna] = casas[linha][coluna] + casas[linha][coluna+3];
+				if( (casas[linhatela+1][colunatela] == 0) && (casas[linhatela][colunatela]!= 0) && (colunatela != 0) &&  (linhatela != 0 ) ){
+					casas[linhatela+1][colunatela] = casas[linhatela][colunatela];
+					casas[linhatela][colunatela] = 0;
+				}
+				if((casas[linhatela][colunatela+1] == casas[linhatela][colunatela] && casas[linhatela][colunatela] !=0)){
+					casas[linhatela][colunatela] = (casas[linhatela][colunatela]) *2;
+					casas[linhatela][colunatela+1] = 0;
+				}
 			
 				}
 			}
@@ -99,11 +113,14 @@ main(){
 				for(colunatela = 0; colunatela < 4; colunatela++){
 			
 			
-				casas[linha][coluna] = casas[linha][coluna] + casas[linha][coluna-1];
-			
-				casas[linha][coluna] = casas[linha][coluna] + casas[linha][coluna-2];
-			
-				casas[linha][coluna] = casas[linha][coluna] + casas[linha][coluna-3];
+				if( (casas[linhatela-1][colunatela] == 0) && (casas[linhatela][colunatela]!= 0) && (colunatela != 0) &&  (linhatela != 3 )){
+					casas[linhatela-1][colunatela] = casas[linhatela][colunatela];
+					casas[linhatela][colunatela] = 0;
+				}
+				if((casas[linhatela][colunatela-1] == casas[linhatela][colunatela] && casas[linhatela][colunatela] !=0)){
+					casas[linhatela][colunatela] = (casas[linhatela][colunatela]) *2;
+					casas[linhatela][colunatela-1] = 0;
+				}
 			
 				}
 			}
@@ -187,11 +204,12 @@ TelaJogo(){  // criando matriz casas e juntando com TelaJogo
 
 sortearCasa(){
 	int	confirm, sorteiacoluna, sorteialinha = 0;
-
+	
+	srand(time(NULL));
 	do 												
 	{ 
-	   	sorteiacoluna = rand() & 3;							// SORTEIA POSIÇÃO PARA A COLUNA
-		sorteialinha = rand() & 3;							// SORTEIA POSIÇÃO PARA A LINHA
+	   	sorteiacoluna = rand() % 4;							// SORTEIA POSIÇÃO PARA A COLUNA
+		sorteialinha = rand() % 4;							// SORTEIA POSIÇÃO PARA A LINHA
 
 		if (casas[sorteialinha][sorteiacoluna] == 0){		// VERIFICA SE O NUMERO DENTRO DA CASA CONFIRMADA É 0
 			casas[sorteialinha][sorteiacoluna] = 2;			// SE FOR 0, PASSA A VALER 2
