@@ -16,7 +16,6 @@ int linhatela = 0;
 int tecla = 0;
 int gameScore = 0;
 int colunatela = 0;
-int linha,coluna = 0;
 int casas[4][4];					// MATRIZ DE CASAS (INT) E SEM VALOR. OS VALORES SER�O ADICIONADOS NA FUN��O MAIN
 
 
@@ -71,35 +70,37 @@ void ParaCima()
 {
 
     for (colunatela = 0; colunatela < 4 ; colunatela++) {
-        int t = 0;
         for (linhatela = 0; linhatela < 4 ; linhatela++) {
-            if (casas[linhatela][colunatela] != 0) {
-                casas[t][colunatela] = casas[linhatela][colunatela];
-                t++;
+                                                              
+            if ( (casas[linhatela - 1][colunatela] == 0) && (casas[linhatela - 2][colunatela] == 0) && (casas[linhatela - 3][colunatela] == 0) && linhatela < 1){      // 1, 2 E 3 POSICOES ACIMA
+                casas[linhatela - 3][colunatela] = casas[linhatela][colunatela];                        // ESSA PARTE VAI SUBSTITUIR 3 POSICOES ACIMA
+                casas[linhatela][colunatela] = 0;
+            } else if ( (casas[linhatela - 1][colunatela] == 0) && (casas[linhatela - 2][colunatela] == 0) && linhatela < 2){             // 1 E 2 POSICOES ACIMA
+                casas[linhatela - 2][colunatela] = casas[linhatela][colunatela];                        // ESSA PARTE VAI SUBSTITUIR 2 POSICOES ACIMA
+                casas[linhatela][colunatela] = 0;
+            } else if ( (casas[linhatela - 1][colunatela] == 0) && linhatela < 3 ){                     // ESSE IF VERIFICA 1 POSICAO ACIMA (LINHATELA - 1) OS OUTROS IF'S VERIFICAM 1 E 2 POSICOES ACIMA E 1, 2 E 3 POSICOES ACIMA
+                casas[linhatela - 1][colunatela] = casas[linhatela][colunatela];
+                casas[linhatela][colunatela] = 0;                                                       // ESSA PARTE VAI SUBSTITUIR 1 POSICAO ACIMA
+                
+            }                                                                                           // A PARTE DO (&&linhatela < x) serve para restringir o funcionamento dos if's.
+
+            if (casas[linhatela][colunatela] != 0) {                                                    // ESSE IF VERIFICA SE A POSICAO DA MATRIZ É DIFERENTE DE 0
+                if ( (casas[linhatela][colunatela] == casas[linhatela - 1][colunatela]) && linhatela < 3 ){
+                    gameScore += (casas[linhatela][colunatela])*2;
+                    casas[linhatela][colunatela] = casas[linhatela][colunatela]*2;
+                    casas[linhatela - 1][colunatela] = 0;
+                } else if ( (casas[linhatela][colunatela] == casas[linhatela - 2][colunatela]) && (casas[linhatela - 1][colunatela] == 0) && linhatela < 2 ) {
+                    gameScore += (casas[linhatela][colunatela])*2;
+                    casas[linhatela][colunatela] = casas[linhatela][colunatela]*2;
+                    casas[linhatela - 2][colunatela] = 0;
+                } else if ( (casas[linhatela][colunatela] == casas[linhatela - 3][colunatela]) && (casas[linhatela - 1][colunatela] == 0) && (casas[linhatela - 2][colunatela] == 0) && linhatela < 1 ){
+                    gameScore += (casas[linhatela][colunatela])*2;
+                    casas[linhatela][colunatela] = casas[linhatela][colunatela]*2;
+                    casas[linhatela - 3][colunatela] = 0;
+                }
             }
         }
-        for (linhatela = t; linhatela < 4 ; linhatela++) casas[linhatela][colunatela] = 0;
     }
-
-    for (colunatela = 0; colunatela < 4 ; colunatela++) {
-        int t = 0;
-        for (linhatela = 0; linhatela < 4 ; linhatela++) {
-            if (casas != 0) {
-                if (casas[linhatela][colunatela] == casas[linhatela + 1][colunatela]) {
-                    casas[t][colunatela] = 2 * casas[linhatela][colunatela];
-                    gameScore += casas[t][colunatela];
-                    t++;
-                    linhatela++;
-                }
-                else {
-                    casas[t][colunatela] = casas[linhatela][colunatela];
-                    t++;
-                }
-            }
-        }
-        for (linhatela = t; linhatela < 4 ; linhatela++) casas[linhatela][colunatela] = 0;
-    }
-
 }
 
 
@@ -122,6 +123,7 @@ void ParaBaixo()
             if (casas != 0) {
                 if (casas[linhatela][colunatela] == casas[linhatela - 1][colunatela]) {
                     casas[t][colunatela] = 2 * casas[linhatela][colunatela];
+                    casas[t][colunatela] = 0;
                     gameScore += casas[t][colunatela];
                     t--;
                     linhatela--;
@@ -155,6 +157,7 @@ void ParaEsquerda()
             if (casas[linhatela][colunatela] != 0) {
                 if (casas[linhatela][colunatela] == casas[linhatela][colunatela + 1]) {
                     casas[linhatela][t] = 2 * casas[linhatela][colunatela];
+                    casas[t][colunatela] = 0;
                     gameScore += casas[linhatela][t];
                     colunatela++;
                     t++;
@@ -189,6 +192,7 @@ void ParaDireita()
             if (casas[linhatela][colunatela] != 0) {
                 if (casas[linhatela][colunatela] == casas[linhatela][colunatela - 1]) {
                     casas[linhatela][t] = 2 * casas[linhatela][colunatela];
+                    casas[t][colunatela] = 0;
                     gameScore += casas[linhatela][t];
                     colunatela--;
                     t--;
@@ -204,7 +208,8 @@ void ParaDireita()
 }
 
 TelaJogo(){  // criando matriz casas e juntando com TelaJogo
-	
+	int linha, coluna = 0;
+
 	printf("                ___________________________________________________________________________________ \n");
 	printf("               |                                                       |         RANKING           |\n");
 	printf("               |    SCORE:                 RETORNAR                    |___________________________|\n");
