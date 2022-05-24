@@ -14,6 +14,7 @@ void TelaJogo();
 int	confirm = 0;			    
 int linhatela = 0;
 int tecla = 0;
+int gameScore = 0;
 int colunatela = 0;
 int linha,coluna = 0;
 int casas[4][4];					// MATRIZ DE CASAS (INT) E SEM VALOR. OS VALORES SERï¿½O ADICIONADOS NA FUNï¿½ï¿½O MAIN
@@ -43,38 +44,41 @@ main(){
 	TelaJogo();
 	
 	
-	//Movimentação
+	//Movimentaï¿½ï¿½o
+    do{
     char tecla = getch();
-    creCheck();
-
 	if (tecla == 'w' || tecla == 'W') {
-    ParaCima();
+        ParaCima();
     }
-        else if (tecla == 's' || tecla == 'S') {
-            ParaBaixo();
-        }
-            else if (tecla == 'a' || tecla == 'A') {
-                ParaEsquerda();
-            }
-                else if (tecla == 'd' || tecla == 'D') {
-                    ParaDireita();
-                }
-                  
-                   
-                   
-                   
+    else if (tecla == 's' || tecla == 'S') {
+        ParaBaixo();
+    }
+    else if (tecla == 'a' || tecla == 'A') {
+        ParaEsquerda();
+    }
+    else if (tecla == 'd' || tecla == 'D') {
+        ParaDireita();
+    }
 
+    sortearCasa();
+    system("cls");
+    TelaJogo();
+    } while (tecla != 5000);
+    
+
+}
 void ParaCima()
 {
-    for (cololunatela = 0; colunatela < 4 ; col++) {
+
+    for (colunatela = 0; colunatela < 4 ; colunatela++) {
         int t = 0;
-        for (lin = 0; lin < 4 ; lin++) {
+        for (linhatela = 0; linhatela < 4 ; linhatela++) {
             if (casas[linhatela][colunatela] != 0) {
-                casas[t][col] = casas[linhatela][colunatela];
+                casas[t][colunatela] = casas[linhatela][colunatela];
                 t++;
             }
         }
-        for (linhatela = t; lininhatela < 4 ; lintela++) casas[linhatela][colunatela] = 0;
+        for (linhatela = t; linhatela < 4 ; linhatela++) casas[linhatela][colunatela] = 0;
     }
 
     for (colunatela = 0; colunatela < 4 ; colunatela++) {
@@ -198,15 +202,6 @@ void ParaDireita()
         for (int colunatela = t; colunatela >= 0; colunatela--) casas[linhatela][colunatela] = 0;
     }
 }
-		
-	
-}
-
-	
-
-
-
-
 
 TelaJogo(){  // criando matriz casas e juntando com TelaJogo
 	
