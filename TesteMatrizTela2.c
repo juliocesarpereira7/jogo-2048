@@ -48,18 +48,18 @@ main(){
 	
 		if ((tecla == 68) || (tecla == 100)){ // TECLA D
 	
-			for (linhatela = 0; linhatela < 4; linhatela++){
-				for(colunatela = 0; colunatela < 4; colunatela++){
+			for (linhatela = 4; linhatela > 0; linhatela--){
+				for(colunatela = 4; colunatela > 0; colunatela--){
 			
-				if( (casas[linhatela][colunatela+1] == 0) && (casas[linhatela][colunatela]!= 0) && (colunatela != 0) && (colunatela != 0 ) ){
-					casas[linhatela][colunatela+1] = casas[linhatela][colunatela];
+				if( (casas[linhatela][colunatela-1] == 0) && (casas[linhatela][colunatela]!= 0) ){
+					casas[linhatela][colunatela-1] = casas[linhatela][colunatela];
 					casas[linhatela][colunatela] = 0;
 				}
-				if((casas[linhatela][colunatela+1] == casas[linhatela][colunatela] && casas[linhatela][colunatela] !=0)){
+				if((casas[linhatela][colunatela-1] == casas[linhatela][colunatela] && casas[linhatela][colunatela] !=0)){
 					casas[linhatela][colunatela] = (casas[linhatela][colunatela]) *2;
-					casas[linhatela][colunatela+1] = 0;
+					casas[linhatela][colunatela-1] = 0;
 				}
-			
+		
 				}
 			}
 				sortearCasa();
@@ -73,13 +73,14 @@ main(){
 				for(colunatela = 0; colunatela < 4; colunatela++){
 			
 			
-				if( (casas[linhatela][colunatela-1] == 0) && (casas[linhatela][colunatela]!= 0) && (colunatela != 0) &&  (colunatela != 3 ) ){
-					casas[linhatela][colunatela-1] = casas[linhatela][colunatela];
+				if( (casas[linhatela][colunatela+1] == 0) && (casas[linhatela][colunatela]!= 0)  ){
+					casas[linhatela][colunatela+1] = casas[linhatela][colunatela];
 					casas[linhatela][colunatela] = 0;
 				}
-				if((casas[linhatela][colunatela-1] == casas[linhatela][colunatela] && casas[linhatela][colunatela] !=0)){
+				
+				if((casas[linhatela][colunatela+1] == casas[linhatela][colunatela] && casas[linhatela][colunatela] !=0)){
 					casas[linhatela][colunatela] = (casas[linhatela][colunatela]) *2;
-					casas[linhatela][colunatela-1] = 0;
+					casas[linhatela][colunatela+1] = 0;
 				}
 			
 				}
@@ -93,7 +94,7 @@ main(){
 				for(colunatela = 0; colunatela < 4; colunatela++){
 			
 				
-				if( (casas[linhatela+1][colunatela] == 0) && (casas[linhatela][colunatela]!= 0) && (colunatela != 0) &&  (linhatela != 0 ) ){
+				if( (casas[linhatela+1][colunatela] == 0) && (casas[linhatela][colunatela]!= 0) ){
 					casas[linhatela+1][colunatela] = casas[linhatela][colunatela];
 					casas[linhatela][colunatela] = 0;
 				}
@@ -109,11 +110,11 @@ main(){
 	
 		else if ((tecla == 83) || (tecla == 115)){ //TECLA S
 	
-			for (linhatela = 0; linhatela < 4; linhatela++){
-				for(colunatela = 0; colunatela < 4; colunatela++){
+			for (linhatela = 4; linhatela > 0; linhatela--){
+				for(colunatela = 4; colunatela > 0; colunatela--){
 			
 			
-				if( (casas[linhatela-1][colunatela] == 0) && (casas[linhatela][colunatela]!= 0) && (colunatela != 0) &&  (linhatela != 3 )){
+				if( (casas[linhatela-1][colunatela] == 0) && (casas[linhatela][colunatela]!= 0)){
 					casas[linhatela-1][colunatela] = casas[linhatela][colunatela];
 					casas[linhatela][colunatela] = 0;
 				}
