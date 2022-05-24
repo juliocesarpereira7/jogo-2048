@@ -24,6 +24,9 @@ int casas[4][4];					// MATRIZ DE CASAS (INT) E SEM VALOR. OS VALORES SERï¿½O AD
 
 // FUNCAO PRINCIPAL
 main(){
+	
+	int t = 0;
+	int gameScore,WinGame = 2048;
 	int opcao = 0;
 
 	TelaJogo(); // Tela matriz e jogo junto
@@ -38,99 +41,163 @@ main(){
 	sortearCasa();
 	system("cls");
 	TelaJogo();
+	
+	
+	//Movimentação
+    char tecla = getch();
+    creCheck();
 
-	do{
-		printf("\n\n\n\n");
-		printf("\t\t\t\t\tJOGUE UTILIZANDO W, A, S, D ");			
+	if (tecla == 'w' || tecla == 'W') {
+    ParaCima();
+    }
+        else if (tecla == 's' || tecla == 'S') {
+            ParaBaixo();
+        }
+            else if (tecla == 'a' || tecla == 'A') {
+                ParaEsquerda();
+            }
+                else if (tecla == 'd' || tecla == 'D') {
+                    ParaDireita();
+                }
+                  
+                   
+                   
+                   
 
-			tecla = getch();					// CAPTURA A TECLA DIGITADA
+void ParaCima()
+{
+    for (cololunatela = 0; colunatela < 4 ; col++) {
+        int t = 0;
+        for (lin = 0; lin < 4 ; lin++) {
+            if (casas[linhatela][colunatela] != 0) {
+                casas[t][col] = casas[linhatela][colunatela];
+                t++;
+            }
+        }
+        for (linhatela = t; lininhatela < 4 ; lintela++) casas[linhatela][colunatela] = 0;
+    }
 
-	
-		if ((tecla == 68) || (tecla == 100)){ // TECLA D
-	
-			for (linhatela = 4; linhatela > 0; linhatela--){
-				for(colunatela = 4; colunatela > 0; colunatela--){
-			
-				if( (casas[linhatela][colunatela-1] == 0) && (casas[linhatela][colunatela]!= 0) ){
-					casas[linhatela][colunatela-1] = casas[linhatela][colunatela];
-					casas[linhatela][colunatela] = 0;
-				}
-				if((casas[linhatela][colunatela-1] == casas[linhatela][colunatela] && casas[linhatela][colunatela] !=0)){
-					casas[linhatela][colunatela] = (casas[linhatela][colunatela]) *2;
-					casas[linhatela][colunatela-1] = 0;
-				}
-		
-				}
-			}
-				sortearCasa();
-		}
-	
-	
-	
-		else if ((tecla == 65) || (tecla == 97)){ // TECLA A 
-	
-			for (linhatela = 0; linhatela < 4; linhatela++){
-				for(colunatela = 0; colunatela < 4; colunatela++){
-			
-			
-				if( (casas[linhatela][colunatela+1] == 0) && (casas[linhatela][colunatela]!= 0)  ){
-					casas[linhatela][colunatela+1] = casas[linhatela][colunatela];
-					casas[linhatela][colunatela] = 0;
-				}
-				
-				if((casas[linhatela][colunatela+1] == casas[linhatela][colunatela] && casas[linhatela][colunatela] !=0)){
-					casas[linhatela][colunatela] = (casas[linhatela][colunatela]) *2;
-					casas[linhatela][colunatela+1] = 0;
-				}
-			
-				}
-			}
-				sortearCasa();
-		}
-	
-		else if ((tecla == 87) || (tecla == 119)){ //TECLA W
-	
-			for (linhatela = 0; linhatela < 4; linhatela++){
-				for(colunatela = 0; colunatela < 4; colunatela++){
-			
-				
-				if( (casas[linhatela+1][colunatela] == 0) && (casas[linhatela][colunatela]!= 0) ){
-					casas[linhatela+1][colunatela] = casas[linhatela][colunatela];
-					casas[linhatela][colunatela] = 0;
-				}
-				if((casas[linhatela][colunatela+1] == casas[linhatela][colunatela] && casas[linhatela][colunatela] !=0)){
-					casas[linhatela][colunatela] = (casas[linhatela][colunatela]) *2;
-					casas[linhatela][colunatela+1] = 0;
-				}
-			
-				}
-			}
-				sortearCasa();
-		}
-	
-		else if ((tecla == 83) || (tecla == 115)){ //TECLA S
-	
-			for (linhatela = 4; linhatela > 0; linhatela--){
-				for(colunatela = 4; colunatela > 0; colunatela--){
-			
-			
-				if( (casas[linhatela-1][colunatela] == 0) && (casas[linhatela][colunatela]!= 0)){
-					casas[linhatela-1][colunatela] = casas[linhatela][colunatela];
-					casas[linhatela][colunatela] = 0;
-				}
-				if((casas[linhatela][colunatela-1] == casas[linhatela][colunatela] && casas[linhatela][colunatela] !=0)){
-					casas[linhatela][colunatela] = (casas[linhatela][colunatela]) *2;
-					casas[linhatela][colunatela-1] = 0;
-				}
-			
-				}
-			}
-				sortearCasa();	
-		}
-		
-		system("cls");						// LIMPA A TELA
-		TelaJogo();	
-	}while(tecla != 999);
+    for (colunatela = 0; colunatela < 4 ; colunatela++) {
+        int t = 0;
+        for (linhatela = 0; linhatela < 4 ; linhatela++) {
+            if (casas != 0) {
+                if (casas[linhatela][colunatela] == casas[linhatela + 1][colunatela]) {
+                    casas[t][colunatela] = 2 * casas[linhatela][colunatela];
+                    gameScore += casas[t][colunatela];
+                    t++;
+                    linhatela++;
+                }
+                else {
+                    casas[t][colunatela] = casas[linhatela][colunatela];
+                    t++;
+                }
+            }
+        }
+        for (linhatela = t; linhatela < 4 ; linhatela++) casas[linhatela][colunatela] = 0;
+    }
+
+}
+
+
+void ParaBaixo()
+{
+    for (colunatela = 0; colunatela < 4 ; colunatela++) {
+        int t = 3;
+        for (linhatela = 5; linhatela >= 0; linhatela--) {
+            if (casas[linhatela][colunatela] != 0) {
+                casas[t][colunatela] = casas[linhatela][colunatela];
+                t--;
+            }
+        }
+        for (linhatela = t; linhatela >= 0; linhatela--) casas[linhatela][colunatela] = 0;
+    }
+
+    for (colunatela = 0; colunatela < 4 ; colunatela++) {
+        int t = 3;
+        for (linhatela = 4; linhatela >= 0; linhatela--) {
+            if (casas != 0) {
+                if (casas[linhatela][colunatela] == casas[linhatela - 1][colunatela]) {
+                    casas[t][colunatela] = 2 * casas[linhatela][colunatela];
+                    gameScore += casas[t][colunatela];
+                    t--;
+                    linhatela--;
+                }
+                else {
+                    casas[t][colunatela] = casas[linhatela][colunatela];
+                    t--;
+                }
+            }
+        }
+        for (linhatela = t; linhatela >= 0; linhatela--) casas[linhatela][colunatela] = 0;
+    }
+}
+
+void ParaEsquerda()
+{
+    for (linhatela = 0; linhatela < 4 ; linhatela++) {
+        int t = 0;
+        for (colunatela = 0; colunatela < 4 ; colunatela++) {
+            if (casas[linhatela][colunatela] != 0) {
+                casas[linhatela][t] = casas[linhatela][colunatela];
+                t++;
+            }
+        }
+        for (colunatela = t; colunatela < 4 ; colunatela++) casas[linhatela][colunatela] = 0;
+    }
+
+    for (linhatela = 0; linhatela < 4 ; linhatela++) {
+        int t = 0;
+        for (colunatela = 0; colunatela < 4 ; colunatela++) {
+            if (casas[linhatela][colunatela] != 0) {
+                if (casas[linhatela][colunatela] == casas[linhatela][colunatela + 1]) {
+                    casas[linhatela][t] = 2 * casas[linhatela][colunatela];
+                    gameScore += casas[linhatela][t];
+                    colunatela++;
+                    t++;
+                }
+                else {
+                    casas[linhatela][t] = casas[linhatela][colunatela];
+                    t++;
+                }
+            }
+        }
+        for (colunatela = t; colunatela < 4 ; colunatela++) casas[linhatela][colunatela] = 0;
+    }
+}
+
+void ParaDireita()
+{
+    for (linhatela = 0; linhatela < 4; linhatela++) {
+        int t = 3;
+        for (colunatela = 4; colunatela >= 0; colunatela--) {
+            if (casas[linhatela][colunatela] != 0) {
+                casas[linhatela][t] = casas[linhatela][colunatela];
+                t--;
+            }
+        }
+        for (colunatela = t; colunatela >= 0; colunatela--) casas[linhatela][colunatela] = 0;
+    }
+
+
+    for (linhatela = 0; linhatela < 4 ; linhatela++) {
+        int t = 3;
+        for (colunatela = 5; colunatela >= 0; colunatela--) {
+            if (casas[linhatela][colunatela] != 0) {
+                if (casas[linhatela][colunatela] == casas[linhatela][colunatela - 1]) {
+                    casas[linhatela][t] = 2 * casas[linhatela][colunatela];
+                    gameScore += casas[linhatela][t];
+                    colunatela--;
+                    t--;
+                }
+                else {
+                    casas[linhatela][t] = casas[linhatela][colunatela];
+                    t--;
+                }
+            }
+        }
+        for (int colunatela = t; colunatela >= 0; colunatela--) casas[linhatela][colunatela] = 0;
+    }
+}
 		
 	
 }
